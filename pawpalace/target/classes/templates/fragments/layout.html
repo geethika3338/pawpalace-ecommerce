@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <title th:text="${title}">PawPalace</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">PawPalace</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/products}">Products</a></li>
+                </ul>
+                <ul class="navbar-nav">
+                    <th:block th:if="${session.loggedInUser == null}">
+                        <li class="nav-item"><a class="nav-link" th:href="@{/login}">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" th:href="@{/register}">Register</a></li>
+                    </th:block>
+                    <th:block th:if="${session.loggedInUser != null}">
+                        <li class="nav-item" th:if="${session.loggedInUser.role == 'ROLE_ADMIN'}">
+                            <a class="nav-link" th:href="@{/admin}">Admin Dashboard</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" th:href="@{/cart}">Cart</a></li>
+                        <li class="nav-item"><a class="nav-link" th:href="@{/orders}">My Orders</a></li>
+                        <li class="nav-item"><span class="nav-link text-info fw-bold" th:text="'Hello, ' + ${session.loggedInUser.username}"></span></li>
+                        <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Logout</a></li>
+                    </th:block>
+                    <!-- Dark Mode Toggle -->
+                    <li class="nav-item ms-2 d-flex align-items-center">
+                        <button id="theme-toggle" class="btn btn-sm btn-outline-light rounded-pill">🌙 Dark</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container"></div>
+    
+    <footer th:fragment="footer" class="footer">
+        <div class="container">
+            <span>&copy; 2024 PawPalace. All rights reserved.</span>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script th:src="@{/js/main.js}"></script>
+    </footer>
+</body>
+</html>

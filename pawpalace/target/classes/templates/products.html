@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('PawPalace - Products')}"></head>
+<body>
+    <nav th:replace="~{fragments/layout :: navbar}"></nav>
+    
+    <div class="container mt-4">
+        <div class="row mb-5 align-items-center bg-light p-4 rounded shadow-sm card">
+            <div class="col-md-6">
+                <h2 class="fw-bold mb-0">Our Pet Collection 🐶🐱</h2>
+                <p class="text-muted mb-0">Find the best food, toys, and accessories for your furry friends.</p>
+            </div>
+            <div class="col-md-6 mt-3 mt-md-0">
+                <div class="d-flex">
+                    <input id="product-search-input" class="form-control me-2 rounded-pill" type="search" placeholder="Search for treats, toys... (Live Search)">
+                </div>
+            </div>
+        </div>
+
+        <div id="product-list-container" class="row">
+            <!-- Products will be injected here via Vanilla JavaScript -->
+            <div class="col-12 text-center py-5">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading products...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

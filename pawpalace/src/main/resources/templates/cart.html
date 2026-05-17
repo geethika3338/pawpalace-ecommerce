@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('PawPalace - Cart')}"></head>
+<body>
+    <nav th:replace="~{fragments/layout :: navbar}"></nav>
+    
+    <div class="container mt-5">
+        <h2>Your Shopping Cart</h2>
+        
+        <div th:if="${param.error}" class="alert alert-danger">
+            There was an error placing your order. Make sure your cart is not empty.
+        </div>
+
+        <div th:if="${cartItems.empty}" class="alert alert-info mt-4">
+            Your cart is empty. <a th:href="@{/products}">Continue shopping</a>
+        </div>
+
+        <div th:if="${!cartItems.empty}" class="row mt-4">
+            <div class="col-md-8">
+                <table class="table table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item : ${cartItems}">
+                            <td>
+                                <img th:src="${item.product.imageUrl}" width="50" class="me-2">
+                                <span th:text="${item.product.name}">Name</span>
+                            </td>
+                            <td th:text="'Rs. ' + ${item.product.price}">Rs. 0.00</td>
+                            <td th:text="${item.quantity}">1</td>
+                            <td th:text="'Rs. ' + (${item.product.price} * ${item.quantity})">Rs. 0.00</td>
+                            <td>
+                                <form th:action="@{/cart/remove}" method="post">
+                                    <input type="hidden" name="cartItemId" th:value="${item.id}" />
+                                    <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h5>Order Summary</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Subtotal</span>
+                            <strong th:text="'Rs. ' + ${totalAmount}">Rs. 0.00</strong>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between mb-4">
+                            <strong>Total</strong>
+                            <strong class="text-success" th:text="'Rs. ' + ${totalAmount}">Rs. 0.00</strong>
+                        </div>
+                        <form th:action="@{/orders/place}" method="post">
+                            <button type="submit" class="btn btn-success w-100 btn-lg">Checkout</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

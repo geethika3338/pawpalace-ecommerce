@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('PawPalace - Home')}"></head>
+<body>
+    <nav th:replace="~{fragments/layout :: navbar}"></nav>
+    
+    <div class="container mt-4">
+        <!-- Hero Section -->
+        <div class="row text-center hero-section">
+            <div class="col-12">
+                <h1 class="display-3 fw-bold mb-3">Welcome to PawPalace 🐾</h1>
+                <p class="lead fs-4">The ultimate paradise for pet accessories, food, and toys!</p>
+                <a th:href="@{/products}" class="btn btn-primary btn-lg mt-3 px-5 py-3 rounded-pill shadow">Shop Now</a>
+            </div>
+        </div>
+
+        <h2 class="mb-4 fw-bold text-center">Featured Pet Products</h2>
+        <div class="row">
+            <div class="col-md-4 mb-5" th:each="product : ${products}">
+                <div class="card product-card h-100">
+                    <img th:src="${product.imageUrl}" class="card-img-top" th:alt="${product.name}">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title" th:text="${product.name}">Product Name</h5>
+                        <p class="card-text text-muted flex-grow-1" th:text="${product.description}">Description</p>
+                        <h4 class="text-primary fw-bold mb-3" th:text="'Rs. ' + ${product.price}">Rs. 0.00</h4>
+                    </div>
+                    <div class="card-footer bg-white border-top-0 pb-3">
+                        <form class="ajax-cart-form">
+                            <input type="hidden" name="productId" th:value="${product.id}" />
+                            <input type="hidden" name="quantity" value="1" />
+                            <button type="submit" class="btn btn-outline-primary w-100 rounded-pill">Add to Cart 🛒</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

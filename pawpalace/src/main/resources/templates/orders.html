@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('PawPalace - My Orders')}"></head>
+<body>
+    <nav th:replace="~{fragments/layout :: navbar}"></nav>
+    
+    <div class="container mt-5">
+        <h2>My Orders</h2>
+        
+        <div th:if="${orders.empty}" class="alert alert-info mt-4">
+            You haven't placed any orders yet. <a th:href="@{/products}">Start shopping</a>
+        </div>
+
+        <div th:if="${!orders.empty}" class="row mt-4">
+            <div class="col-12">
+                <div class="card mb-3" th:each="order : ${orders}">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <strong>Order #<span th:text="${order.id}"></span></strong>
+                        <span class="badge bg-success" th:text="${order.status}">PENDING</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <strong>Date:</strong> <span th:text="${#temporals.format(order.orderDate, 'dd-MM-yyyy HH:mm')}"></span><br>
+                            <strong>Total Amount:</strong> <span class="text-primary fw-bold" th:text="'Rs. ' + ${order.totalAmount}"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>
