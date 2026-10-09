@@ -1,25 +1,29 @@
 # PawPalace — Pet E-commerce Application
 
-PawPalace is a Java-based web application prototype for browsing pet products and practicing common e-commerce workflows. The Spring Boot application is located in the `pawpalace/` directory.
+PawPalace is a learning project that explores the development of a pet products e-commerce web application using Java and Spring Boot.
 
 ## Features
 
+- Browse and search pet products
 - User registration and login flows
-- Browse and search products
 - Product management for administrators
 - Shopping cart and order workflows
-- Product REST endpoints
+- REST endpoints for product operations
 - Server-rendered pages using Thymeleaf
 
 ## Tech Stack
 
-- **Language:** Java 17
-- **Backend:** Spring Boot 3, Spring Web MVC, Spring Data JPA, Spring JDBC
-- **Frontend:** Thymeleaf, HTML, CSS, JavaScript, Bootstrap
-- **Database:** MySQL
-- **Build:** Maven
+| Area | Technologies |
+|---|---|
+| Language | Java 17 |
+| Backend | Spring Boot 3, Spring Web MVC, Spring Data JPA, Spring JDBC |
+| Frontend | Thymeleaf, HTML, CSS, JavaScript, Bootstrap |
+| Database | MySQL |
+| Build tool | Maven |
 
 ## Project Structure
+
+The Spring Boot application is located in the `pawpalace/` directory.
 
 ```text
 pawpalace-ecommerce/
@@ -30,44 +34,46 @@ pawpalace-ecommerce/
 └── .vscode/
 ```
 
-## Prerequisites
+## Run Locally
+
+### Prerequisites
 
 - JDK 17
 - MySQL Server
-- Maven, or an IDE with Maven support
+- Maven
 
-## Run Locally
+### Setup
 
-1. Clone this repository.
+1. Clone the repository.
 2. Open a terminal in the application directory:
 
    ```bash
    cd pawpalace
    ```
 
-3. Create the database configured by the application. The existing project documentation uses:
+3. Create the database expected by the application:
 
    ```sql
    CREATE DATABASE PawPalace;
    ```
 
-4. Update `src/main/resources/application.properties` with your local database URL, username, and password. Do not commit real credentials.
+4. Update `src/main/resources/application.properties` with your local database URL, username, and password. Never commit real credentials.
 5. Start the application:
 
    ```bash
    mvn spring-boot:run
    ```
 
-6. Open the local URL and port configured by the application properties.
+6. Open the local address and port configured by the application.
 
 ## API
 
-The application documentation describes product endpoints under `/api/products`. Check the controller mappings in the source before relying on a specific request or payload.
+The project documentation describes product endpoints under `/api/products`. Check the controller mappings for the supported operations and request formats.
 
 ## Notes
 
-This is a learning project. Review the authentication, authorization, database configuration, and validation before deploying it publicly. Do not use default credentials in a production environment.
+This is a learning project, not a claim of production readiness. Authentication, authorization, validation, database configuration, and default credentials should be reviewed before deployment.
 
 ## Author
 
-Geethika B. — [GitHub profile](https://github.com/geethika3338)
+Geethika B. — [GitHub Profile](https://github.com/geethika3338)
